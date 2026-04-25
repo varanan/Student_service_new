@@ -22,8 +22,12 @@ const swaggerOptions = {
     },
     servers: [
       {
+        url: '/',
+        description: 'Current host (browser origin — no fixed public IP)',
+      },
+      {
         url: `http://localhost:${PORT}`,
-        description: 'Local server',
+        description: 'Local server (explicit)',
       },
     ],
     components: {
@@ -49,7 +53,6 @@ const swaggerOptions = {
       },
     },
   },
-  // Scan these files for JSDoc @swagger annotations
   apis: ['./routes/studentRoutes.js'],
 };
 
@@ -77,7 +80,7 @@ mongoose
     console.log('MongoDB connected');
     app.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
-      console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`);
+      console.log(`Swagger UI: /api-docs (same origin as this server)`);
     });
   })
   .catch((err) => {
